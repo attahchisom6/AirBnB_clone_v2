@@ -1,4 +1,4 @@
--- setting up a database for a specied user, with all priviledges granted
+-- setting up a server to work on
 CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
 
