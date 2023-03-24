@@ -2,8 +2,8 @@
 """ Console Module """
 import cmd
 import sys
-from models.base_model import BaseModel
 from models.__init__ import storage
+from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -130,8 +130,8 @@ class HBNBCommand(cmd.Cmd):
 
                 param_value = eval(param_value)
                 if type(param_value) is str:
-                    param_value = param_value.replace('_', ' ').replace('"',
-                    '\\"')
+                    param_value = param_value.replace(
+                            '_', ' ').replace('"', '\\"')
                 kw[param] = param_value
         except SyntaxError:
             print("** class name missing **")
@@ -212,7 +212,7 @@ class HBNBCommand(cmd.Cmd):
         print("Destroys an individual instance of a class")
         print("[Usage]: destroy <className> <objectId>\n")
 
-    def do_all(self, cls=None):
+    def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
 
@@ -221,13 +221,11 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
-                    print_list.append(str(v))
-        else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(HBNBCommand.classes[args]).items():
                 print_list.append(str(v))
-
+        else:
+            for k, v in storage.all().items():
+                print_list.append(str(v))
         print(print_list)
 
     def help_all(self):
@@ -334,6 +332,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
