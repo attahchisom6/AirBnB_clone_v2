@@ -1,15 +1,14 @@
 #!/usr/bin/python3
 """class defining a database storage"""
 from os import getenv
-from models import syorage
 from models.base_model import Base
-from sqlalchemy import create_session
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, session
 from models.user import User
 from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
-from models.State import State
+from models.state import State
 from models.user import User
 
 
@@ -27,14 +26,14 @@ class DBStorage:
         engine = self.__engine
 
         user = getenv("HBNB_MYSQL_USER")
-        Pas = getenv("HBNB_MYSQL_PWD")
-        host getenv("HBNB_MYSQL_HOST")
+        pas = getenv("HBNB_MYSQL_PWD")
+        host = getenv("HBNB_MYSQL_HOST")
         db = getenv("HBNB_MYSQL_DB")
         env = getenv("HBNB_ENV")
 
-        server_url = "mysql+mysqldb://{}.{}@{}:3306/{}".format(uaer, pas, host, db)
+        server_url = "mysql+mysqldb://{}.{}@{}:3306/{}".format(user, pas, host, db)
         engine = create_engine(server_url, pool_pre_ping=True)
-        session = sessionmaker()
+
         if env == "test":
             Base.metadata.drop_all(engine)
 
@@ -65,7 +64,7 @@ class DBStorage:
     def new(self, obj):
         """adding a new object to the current database session
         """
-        self._session.add(obj)
+        self.__session.add(obj)
 
     def save(self):
         """commit all changes to the current database
