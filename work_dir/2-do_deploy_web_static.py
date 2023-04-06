@@ -21,6 +21,14 @@ def do_deploy(archive_path):
     newPath = "/data/web_static/releases/" + name
 
     try:
-        put(archive_path, "/tmp")
-        run(mkdir -p newPath)
-        run(tar -xzf name.tgz -C
+        put(archive_path, "/tmp/")
+        run("mkdir -p {}".format(newPath))
+        run("tar -xzf {}.tgz -C {}".format(name, newPath))
+        run("rm -rf /tmp/{}.tgz".format(name))
+        run("mv {}/web_static/* {}".format(newPath, newPath))
+        run("rm -rf {}/web_static".format(newPath))
+        run("rm -rf /data/web_static/current")
+        run("ln -s {} /data/web_static/current".format(newPath))
+        return True
+    except Exception:
+        return False
