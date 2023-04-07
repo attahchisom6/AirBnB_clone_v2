@@ -5,12 +5,12 @@ from os import path
 from fabric.api import run, env, put
 from fabric.contrib import files
 
-env.hosts = ['54.144.221.216', '54.209.215.95']
+env.hosts = ['100.25.191.25', '54.209.27.50']
 
 
 def do_deploy(archive_path):
     """deploy decompressed files"""
-    if not archive_path:
+    if not path.exists(archive_path):
         return False
 
     temp = archive_path.split(".")[0]
