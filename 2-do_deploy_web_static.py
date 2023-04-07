@@ -3,10 +3,10 @@
 script to deploy decompresses files to my servers
 """
 from os import path
+from fabric.contrib import files
 from fabric.api import run, env, put
 
 env.hosts = ["54.144.221.216", "54.209.215.95"]
-env.user = 'ubuntu'
 
 
 def do_deploy(archive_path):
