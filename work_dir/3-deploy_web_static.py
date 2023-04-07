@@ -48,7 +48,7 @@ def do_pack():
             run("mv {}/web_static/* {}".format(folder, folder))
             run("rm -r {}/web_static".format(folder))
             run("rm -rf /data/web_static/current")
-            run("ln -s {} /data/web_stayic/current".format(folder))
+            run("ln -s {} /data/web_static/current".format(folder))
             return True
         except Exception:
             return False
@@ -57,8 +57,7 @@ def do_pack():
         """
         distribute data to my servers
         """
-        try:
-            archive = do_pack()
-        except Exception:
+        archive = do_pack()
+        if archive is None:
             return False
-        do_deploy(archive)
+        return do_deploy(archive)
