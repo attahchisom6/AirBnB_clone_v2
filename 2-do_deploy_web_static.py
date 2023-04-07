@@ -5,7 +5,7 @@ from os import path
 from fabric.api import run, env, put
 from fabric.contrib import files
 
-env.hosts = ['100.25.191.25', '54.209.27.50']
+env.hosts = ['54.144.221.216', '54.209.215.95']
 
 
 def do_deploy(archive_path):
@@ -20,9 +20,9 @@ def do_deploy(archive_path):
     try:
         put(archive_path, "/tmp")
         run("mkdir -p {}".format(newPath))
-        run("tar -xfz /tmp/{}.tgz {}".format(name, newPath))
+        run("tar -xzf /tmp/{}.tgz -C {}".format(name, newPath))
         run("rm -rf /tmp/{}.tgz".format(name))
-        run("mv {}/web_static/* {}".format(newPath, newPath))
+        run("mv {}/web_static/* {}/".format(newPath, newPath))
         run("rm -rf {}/web_static".format(newPath))
         run("rm -rf /data/web_static/current")
         run("ln -s {} /data/web_static/current".format(newPath))
