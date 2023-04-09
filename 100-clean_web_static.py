@@ -1,22 +1,22 @@
 #!/usr/bin/python3
-"""
-This will serve to clean up old files from our machine
+""" Function that deploys """
+from fabric.api import *
 
-Args:
-    number of archives in our direcyory
-"""
-from fabric import local
+
+env.hosts = ['35.231.33.237', '34.74.155.163']
+env.user = "ubuntu"
 
 
 def do_clean(number=0):
-    """the directory versions and /data/web_static/releases must be
-    searched for files to delete
-    """
+    """ CLEANS """
+
+    number = int(number)
+
     if number == 0:
-        int(number) = 2
+        number = 2
     else:
         number += 1
 
-    path = /data/web_static/releases/
-    local("cd versions; ls -t | tail -n +{} | xargs rm -rf".format(number))
-    local("cd {}; ls -t | tail -n +{} | xargs rm -rf".format(path, number))
+    local('cd versions ; ls -t | tail -n +{} | xargs rm -rf'.format(number))
+    path = '/data/web_static/releases'
+    run('cd {} ; ls -t | tail -n +{} | xargs rm -rf'.format(path, number))
