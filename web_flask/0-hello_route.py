@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-"""Starts a Flask web application.
-The application listens on 0.0.0.0, port 5000.
-Routes:
-    /: Displays 'Hello HBNB!'
+"""
+This python scrip starts a wev application rhat run on the host
+0.0.0.0 and port 5000
+Args:
+    route "/": display "Hello HBNB!”
 """
 from flask import Flask
 
@@ -10,10 +11,11 @@ app = Flask(__name__)
 
 
 @app.route("/", strict_slashes=False)
-def hello_hbnb():
-    """Displays 'Hello HBNB!'"""
+def greet_hbnb():
+    """prints greeting message to our hbnb
+    """
     return "Hello HBNB!"
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port=5000)
