@@ -29,8 +29,9 @@ def text_without_underscore(text):
     return "C {}".format(txt)
 
 
+@app.route("/python/")
 @app.route("/python/<text>", strict_slashes=False)
-def python_text_without_underscore(text="cool"):
+def python_text_without_underscore(text="is cool"):
     """print text without underacore, 'cool' is its default text
     """
     txt = text.replace("_", " ")
