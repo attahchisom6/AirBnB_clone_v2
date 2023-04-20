@@ -40,6 +40,9 @@ def python_text_without_underscore(text="is cool"):
 
 @app.route("/number/<int:n>", strict_slashes=False)
 def print_integer(n):
+    """
+    orint out required string containing n if only n is an integer
+    """
     num_txt = "{:d} is a number".format(n)
     return num_txt
 
