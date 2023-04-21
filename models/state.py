@@ -1,35 +1,34 @@
 #!/usr/bin/python3
-"""This is the state class"""
-from sqlalchemy.ext.declarative import declarative_base
+""" State Module for HBNB project """
 from models.base_model import BaseModel, Base
+from sqlalchemy import String, Column
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, String
+from os import getenv
 import models
-from models.city import City
-import shlex
 
 
 class State(BaseModel, Base):
-    """This is the class for State
-    Attributes:
-        name: input name
-    """
-    __tablename__ = "states"
-    name = Column(String(128), nullable=False)
-    cities = relationship("City", cascade='all, delete, delete-orphan',
-                          backref="state")
+    """ State class """
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+        __tablename__ = "states"
 
-    @property
-    def cities(self):
-        var = models.storage.all()
-        lista = []
-        result = []
-        for key in var:
-            city = key.replace('.', ' ')
-            city = shlex.split(city)
-            if (city[0] == 'City'):
-                lista.append(var[key])
-        for elem in lista:
-            if (elem.state_id == self.id):
-                result.append(elem)
-        return (result)
+        name = Column(String(128), nullable=False)
+        cities = relationship('City', backref="state", cascade="delete, delete-orphan, all"))
+
+    if getenv("HBNB_TYPE_STORAGE") != "db":
+        @property
+        def cities(self):
+            """returns a list of city instances with state_id = state.id
+            """
+            c_list = []
+            s_list = []
+
+            obj_dict = models.storage.all()
+            for key in obj_dict:
+                classname = key.split(".")[0]
+                if classname == "City":
+                    s_list.append(obj_dict[key])
+            for elem in s_list:
+                if elem.state_id == self.id:
+                    c_list.append(elem)
+            return (c_list)
