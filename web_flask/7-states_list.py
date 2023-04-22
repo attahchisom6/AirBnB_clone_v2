@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 
 @app.route("/state_list", strict_slashes=False)
-def show_states(self):
+def show_states():
     """display a list of states we currently have at the moment
     """
     states = storage.all(State).values()
