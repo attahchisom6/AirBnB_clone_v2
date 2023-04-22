@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-script to build a web application
+web framework creating a web application
 """
 from flask import Flask, render_template
 from models import storage
@@ -8,17 +8,20 @@ from models.state import State
 
 app = Flask(__name__)
 
+
 @app.teardown_appcontext
-def close_db(exc):
-    """delete current session when its done
+def teardown(self):
+    """
+    delete curent session once its done
     """
     storage.close()
 
-@app.route("/state_list", strict_slashes=False)
+
+@app.route("/states_list", strict_slashes=False)
 def show_states():
-    """display a list of states we currently have at the moment
+    """displays list of all available states in the current session
     """
-    states = storage.all(State).values()
+    states = storage.all(State)
     return render_template("7-states_list.html", states=states)
 
 
