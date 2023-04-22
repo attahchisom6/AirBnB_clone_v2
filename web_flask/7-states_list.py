@@ -1,30 +1,21 @@
 #!/usr/bin/python3
-"""starts a Flask web application
 """
-from flask import Flask, render_template
+script to build a web application
+"""
+from flask import Flask
 from models import storage
 from models.state import State
 
-
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.teardown_appcontext
-def close_db(exc):
-    """closes
+@app.route("/state_list", strict_slashes=False)
+def show_states(self):
+    """display a list of states we currently have at the moment
     """
-    storage.close()
+    states = storage.all(States).values()
+    return render_template("7-states_list.html", st=states)
 
 
-@app.route('/states_list')
-def states_list():
-    """display a HTML page
-    """
-    states = storage.all(State).values()
-    return render_template("7-states_list.html", states=states)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
-    app.run(host='0.0.0.0', port=5000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
