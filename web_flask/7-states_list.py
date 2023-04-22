@@ -2,7 +2,7 @@
 """
 script to build a web application
 """
-from flask import Flask
+from flask import Flask, render_templat, render_template
 from models import storage
 from models.state import State
 
@@ -15,6 +15,14 @@ def show_states(self):
     """
     states = storage.all(States).values()
     return render_template("7-states_list.html", states=states)
+
+
+@app.teardown_appcontext
+def remove_current_sqlSession(self):
+    """
+    removes current session each time a session js done
+    """
+    storage.close()
 
 
 if __name__ == "__main__":
