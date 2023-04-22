@@ -9,7 +9,7 @@ from models.state import State
 app = Flask(__name__)
 
 @app.teardown_appcontext
-def teardown(self):
+def close_db(exc):
     """delete current session when its done
     """
     storage.close()
