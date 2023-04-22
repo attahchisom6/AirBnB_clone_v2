@@ -6,7 +6,7 @@ from flask import Flask
 from models import storage
 from models.state import State
 
-Flask(__name__)
+app = Flask(__name__)
 
 
 @app.route("/state_list", strict_slashes=False)
@@ -18,5 +18,4 @@ def show_states(self):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
     app.run(host="0.0.0.0", port=5000)
