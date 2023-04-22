@@ -18,7 +18,7 @@ def show_states(self):
 
 
 @app.teardown_appcontext
-def remove_current_sqlSession(exception):
+def teardown(self):
     """
     removes current session each time a session js done
     """
