@@ -8,6 +8,11 @@ from models.state import State
 
 app = Flask(__name__)
 
+@app.teardown_appcontext
+def teardown(self):
+    """delete current session when its done
+    """
+    storage.close()
 
 @app.route("/state_list", strict_slashes=False)
 def show_states():
@@ -15,14 +20,6 @@ def show_states():
     """
     states = storage.all(State).values()
     return render_template("7-states_list.html", states=states)
-
-
-@app.teardown_appcontext
-def teardown(self):
-    """
-    removes current session each time a session js done
-    """
-    storage.close()
 
 
 if __name__ == "__main__":
