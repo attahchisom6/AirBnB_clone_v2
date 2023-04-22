@@ -2,7 +2,7 @@
 """
 script to build a web application
 """
-from flask import Flask, render_templat, render_template
+from flask import Flask, render_template
 from models import storage
 from models.state import State
 
