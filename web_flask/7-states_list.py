@@ -22,7 +22,7 @@ def show_states():
     """displays list of all available states in the current session
     """
     states = storage.all(State).values()
-    return render_template("7-states_list.html", states=states)
+    return render_template("7-states_list.html", st=states)
 
 
 if __name__ == "__main__":
