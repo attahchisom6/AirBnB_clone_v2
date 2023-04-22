@@ -21,7 +21,7 @@ def teardown(self):
 def show_states():
     """displays list of all available states in the current session
     """
-    states = storage.all(State)
+    states = storage.all(State).values()
     return render_template("7-states_list.html", states=states)
 
 
