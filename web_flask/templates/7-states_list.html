@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <HTML lang="en">
-    <HEAD>
-        <TITLE>HBNB</TITLE>
-    </HEAD>
-    <BODY>
-	    <H1>States</H1>
-        <UL>
-		{% for state in st | sort(attribute="name") %}
-		<Li>{{ state.id }}: <B>{{ state.name}}</B>
-		</Li>
-		{% endfor %}
-        </UL>
-    </BODY>
+  <HEAD>
+    <TITLE>HBNB</TITLE>
+  </HEAD>
+  <BODY>
+    <H1>{{Table}}</H1>
+    <UL>
+      {%for id, name in items | dictsort(false, 'value') %}
+      <LI>{{ id }}: <B>{{ name }}</B></LI>
+      {% endfor %}
+    </UL>
+  </BODY>
 </HTML>
