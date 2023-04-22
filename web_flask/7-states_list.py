@@ -14,7 +14,7 @@ def show_states(self):
     """display a list of states we currently have at the moment
     """
     states = storage.all(States).values()
-    return render_template("7-states_list.html", st=states)
+    return render_template("7-states_list.html", states=states)
 
 
 if __name__ == "__main__":
