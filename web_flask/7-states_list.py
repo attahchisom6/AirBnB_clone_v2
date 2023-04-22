@@ -13,7 +13,7 @@ app = Flask(__name__)
 def show_states(self):
     """display a list of states we currently have at the moment
     """
-    states = storage.all(States).values()
+    states = storage.all(State).values()
     return render_template("7-states_list.html", states=states)
 
 
