@@ -1,48 +1,53 @@
 <!DOCTYPE html>
-<HTML lang="EN">
-	<HEAD>
-		<META CHARSET="utf-8">
-		<TITLE>HBNB</TITLE>
+<HTML lang="en">
+  <HEAD>
+    <META charset="utf-8">
+    <TITLE>AirBnB clone</TITLE>
+    <LINK rel="stylesheet" href="../static/styles/reset.css">
+    <LINK rel="stylesheet" href="../static/styles/4-common.css">
+    <LINK rel="stylesheet" href="../static/styles/3-header.css">
+    <LINK rel="stylesheet" href="../static/styles/3-footer.css">
+    <LINK rel="stylesheet" href="../static/styles/6-filters.css">
+    <LINK rel="icon" href="../static/images/icon.png">
+  </HEAD>
 
-		<LINK rel="stylesheet", type="text/css", href="../static/styles/4-common.css">
-		<LINK rel="stylesheet", type="text/css", href="../static/styles/3-header.css">
-		<LINK rel="stylesheet", type="/text", href="../static/styles/3-footer.css">
-		<LINK rel="stylesheet", type="text/css", href="../static/styles/6-filters.css">
-		<LINK rel="stylesheet", type="text/css", rel="icon", type="image/png", href="../static/images/icon.png">
-	</HEAD>
-	<BODY>
-		<HEADER><DIV class="logo"></DIV></HEADER>
-		<DIV class="container">
-			<SECTION class="filters">
-				<DIV class="locations">
-					<H3>States</H3>
-					<H4>&nbsp;</H4>
-					<UL class="popover">
-						{% for state in st | sort(attribute="name") %}
-						<Li><H2>{{ state.name }}</H2></Li>
-						<Li>
-							<Ul class="popover">
-								{% for city in state.cities | sort(attribute="name" %}
-								<Li>{{ city.name }}</Li>
-								{% endfor %}
-								</ul>
-						</Li>
-						{% endfor %}
-					</UL>
-				</DIV>
+  <BODY>
+    <HEADER></HEADER>
 
-				<DIV class="amenities">
-					<H3>Amenities</H3>
-					<H4>&nbsp;</H4>
-					<UL class="popover">
-						{% for amenity in amen | sort(attribute="name") %}
-						<Li>{{ amenity.name }}</Li>
-						{% endfor %}
-					</UL>
-				</DIV>
-				<BUTTON>Search</BUTTON>
-			</SECTION>
-		</DIV>
-		<FOOTER>Best School</FOOTER>
-	</BODY>
+    <DIV class="container">
+      <SECTION class="filters">
+        <DIV class="locations">
+          <H3>States</H3>
+          <H4>&nbsp;</H4>
+          <DIV class="popover">
+            <UL>
+            {% for state in states.values()|sort(attribute="name") %}
+              <LI><STRONG>{{ state.name }}</STRONG>
+                <UL>
+                {% for city in state.cities|sort(attribute="name") %}
+                  <LI>{{ city.name }}</LI>
+                {% endfor %}
+                </UL>
+              </LI>
+            {% endfor %}
+            </UL>
+          </DIV>
+
+        </DIV><DIV class="amenities">
+          <H3>Amenities</H3>
+          <H4>&nbsp;</H4>
+          <UL class="popover">
+          {% for amenity in amenities.values()|sort(attribute="name") %}
+            <LI>{{ amenity.name }}</LI>
+          {% endfor %}
+          </UL>
+        </DIV>
+        <BUTTON>Search</BUTTON>
+      </SECTION>
+    </DIV>
+
+    <FOOTER>
+      Holberton School
+    </FOOTER>
+  </BODY>
 </HTML>
