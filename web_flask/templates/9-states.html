@@ -7,23 +7,22 @@
 			{% if st is mapping %}
 				<H1>States</H1>
 				<ul>
-					{% for state in st | sort(attribute="name") %}
+					{% for state in st.values() | sort(attribute="name") %}
 					<Li>{{ state.id }}: <B>{{ state.name }}</B></Li>
 					{% endfor %}
 				</ul>
 
-				{% elif st is defined %}
-					<H1>State: {{ st.name }}</H1>
-
-					<H3>Cities:</H3>
-					<ul>
-						{% for city in st.cities | sort(attribute="name") %}
-						<Li>{{ city.id }}: <B>{{ city.name }}</B></Li>
-						{% endfor %}
-					</ul>
-			
-				{% else %}
-					<H1>Not found!</H1>
-				{%endif %}
+			{% elif st is defined %}
+				<H1>State: {{ st.name }}</H1>
+				<H3>Cities:</H3>
+				<ul>
+					{% for city in st.cities | sort(attribute="name") %}
+					<Li>{{ city.id }}: <B>{{ city.name }}</B></Li>
+					{% endfor %}
+				</ul>
+	
+			{% else %}
+				<H1>Not found!</H1>
+			{% endif %}
 		</BODY>
 </HTML>
