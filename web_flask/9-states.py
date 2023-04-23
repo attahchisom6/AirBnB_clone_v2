@@ -22,7 +22,7 @@ def show_states():
     """displays list of all available states in the current session
     """
     states = storage.all(State)
-    return render_template("9-states.html", state=states)
+    return render_template("9-states.html", st=states)
 
 
 @app.route("/states/<id>", strict_slashes=False)
@@ -32,7 +32,7 @@ def state_by_id_contains_city(id):
     states = storage.all(State).values()
     for state in states:
         if state.id == id:
-            return render_template("9-states.html", state=state)
+            return render_template("9-states.html", st=state)
     return render_template("9-states.html")
 
 
