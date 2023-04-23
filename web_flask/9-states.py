@@ -17,7 +17,7 @@ def teardown(self):
     storage.close()
 
 
-@app.route("/states/<id>", strict_slashes=False)
+@app.route("/states", strict_slashes=False)
 def show_states():
     """displays list of all available states in the current session
     """
@@ -31,10 +31,9 @@ def state_by_id_contains_city(id):
     """
     states = storage.all(State).values()
     for state in states:
-        if state.id = id:
+        if state.id == id:
             return render_template("9-states.html", st=state)
-        else:
-            return render_template("9-states.html")
+    return render_template("9-states.html")
 
 
 if __name__ == "__main__":
